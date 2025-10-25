@@ -1,25 +1,15 @@
-pipeline {
+pipeline{
     agent any
 
-    stages {
-        stage('Restore .NET packages') {
-            steps {
-                echo 'Restoring .NET packages...'
-                sh 'dotnet restore'
+    stages{
+        stage("Build .NET Project"){
+            steps{
+                sh 'dotnet build' 
             }
         }
-
-        stage('Build .NET project') {
-            steps {
-                echo 'Running build...'
-                sh 'dotnet build --no-restore'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-                sh 'dotnet test --no-build --verbosity normal'
+        stage("Run Unit and Integration Tests"){
+            steps{
+                sh 'dotnet test --no-build --verbosity normal' 
             }
         }
     }
