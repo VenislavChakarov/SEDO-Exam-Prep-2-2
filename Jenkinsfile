@@ -5,7 +5,8 @@ pipeline {
         stage('Install .NET 6') {
             steps {
                 sh '''
-                    wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+                    # Use curl instead of wget
+                    curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
                     bash dotnet-install.sh --version 6.0.426 --install-dir $HOME/dotnet
                     export DOTNET_ROOT=$HOME/dotnet
                     export PATH=$DOTNET_ROOT:$PATH
